@@ -11,21 +11,19 @@ import com.marvinslullaby.kotlin101.data.ColorsModel
 
 class ColorPickerActivity : Activity() {
 
-  protected lateinit var recycler: RecyclerView
+  protected val recycler: RecyclerView by lazy { findViewById(R.id.recycler) as RecyclerView }
   protected val adapter = ColorAdapter()
   protected val model = ColorsModel(this)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.color_picker)
-    recycler = findViewById(R.id.recycler) as RecyclerView
+
     recycler.layoutManager = LinearLayoutManager(this)
     recycler.adapter = adapter
     adapter.selected = {
-      val intent = Intent(this, ColorViewerActivity::class.java)
-      intent.putExtra(ColorViewerActivity.COLOR, it)
+      val intent = ColorViewerActivity.getIntent(this, it)
       startActivity(intent)
-
     }
     model.getColors {
       adapter.colors = it

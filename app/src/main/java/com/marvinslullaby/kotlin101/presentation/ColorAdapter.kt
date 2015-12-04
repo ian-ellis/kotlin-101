@@ -15,7 +15,7 @@ class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
   private var layoutInflater: LayoutInflater? = null
   public var selected: ((Color) -> Unit)? = null
 
-  public var colors: List<Color> = listOf(Color("", android.graphics.Color.parseColor("#00FF00")))
+  public var colors: List<Color> = listOf()
     set(value) {
       field = value
       notifyDataSetChanged()
@@ -40,9 +40,7 @@ class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
     return ViewHolder(inflater.inflate(R.layout.color_picker_list_item, parent, false))
   }
 
-  override fun getItemCount(): Int {
-    return colors.size
-  }
+  override fun getItemCount() = colors.size
 
   public inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     public val title: TextView

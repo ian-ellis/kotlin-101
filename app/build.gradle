@@ -6,8 +6,8 @@ android {
   buildToolsVersion "23.0.2"
 
   defaultConfig {
-    applicationId "com.marvinslullaby.kotlintoyproblem"
-    minSdkVersion 22
+    applicationId "com.marvinslullaby.kotlin101"
+    minSdkVersion 21
     targetSdkVersion 23
     versionCode 1
     versionName "1.0"

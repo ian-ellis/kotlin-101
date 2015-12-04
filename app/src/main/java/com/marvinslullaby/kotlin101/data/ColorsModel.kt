@@ -7,11 +7,11 @@ import com.marvinslullaby.kotlin101.data.vo.Color
 
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
 
 
 class ColorsModel(val context: Context) {
-
-  protected var colors: MutableList<Color>? = null
+  protected var colors: List<Color>? = null
   protected val queuedCallbacks: MutableList<((List<Color>) -> Unit)> = arrayListOf()
 
   public fun getColors(callback: (List<Color>) -> Unit) {
@@ -26,9 +26,9 @@ class ColorsModel(val context: Context) {
     }
   }
 
-  private inner class LoadColors : AsyncTask<Void, Void, MutableList<Color>>() {
+  private inner class LoadColors : AsyncTask<Void, Void, List<Color>>() {
 
-    override fun doInBackground(vararg params: Void?): MutableList<Color>? {
+    override fun doInBackground(vararg params: Void?): List<Color>? {
       val colors: MutableList<Color> = arrayListOf()
       val inputStream = context.resources.openRawResource(R.raw.colors)
       val bytes = ByteArray(inputStream.available())
@@ -46,7 +46,7 @@ class ColorsModel(val context: Context) {
       return colors
     }
 
-    override fun onPostExecute(result: MutableList<Color>?) {
+    override fun onPostExecute(result: List<Color>?) {
       result?.let {
         colors = result
         queuedCallbacks.forEach {
